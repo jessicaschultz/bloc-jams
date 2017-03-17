@@ -28,6 +28,21 @@
      ]
  };
 
+var albumSeasons = {
+    title: 'Seasons',
+    artist: 'Mother Nature',
+    label: 'EM',
+    year: '2017',
+    albumArtUrl: 'assets/images/album_covers/13.png',
+    songs: [
+          {title: 'Winter', duration: '1:01'},
+          {title: 'Spring', duration: '5:01' },
+          { title: 'Summer', duration: '3:21'},
+          { title: 'Fall', duration: '3:14' }
+    ]
+
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
     var template =
         '<tr class="album-view-song-item">'
@@ -66,3 +81,20 @@ var setCurrentAlbum = function(album) {
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
  };
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+albumImage.addEventListener('click', function() {
+  var albumTitle = document.getElementsByClassName('album-view-title')[0];
+  
+  if (albumTitle.firstChild.nodeValue == 'The Colors') {
+    setCurrentAlbum(albumMarconi);
+  }
+  else if (albumTitle.firstChild.nodeValue == 'The Telephone') {
+    setCurrentAlbum(albumSeasons);
+  }
+  else if (albumTitle.firstChild.nodeValue =='Seasons') {
+    setCurrentAlbum(albumPicasso);
+  };
+})
+//if the image is the first album, when I click on it, I want it to change to the second album
+// if the image is the second album, when I clickon it, I want it to change to the third album
+// if the image is the third album, when I clickon it, I want it to change to the first album
