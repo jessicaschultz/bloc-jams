@@ -15,31 +15,37 @@ var setSong = function(songNumber){
 };
 
 var setCurrentTimeInPlayerBar = function(currentTime){
-  
       var currentTime = filterTimeCode(currentSoundFile.getTime());
-      //$('.seek-control .current-time').html(currentTime);
+      $('.seek-control .current-time').html(currentTime);
       var $currentTimeText = $('div.current-time');
       $currentTimeText.text(currentTime);
       
-  console.log($currentTimeText.text());
-  console.log('value of currentTime is: '+ currentTime);
+/*  console.log($currentTimeText.html());
+  console.log('current time is: '+ currentTime);*/
 };
 
 var setTotalTimeInPlayerBar = function(totalTime){
-      var totalTime = filterTimeCode(currentSoundFile.getDuration());
-      var $totalTimeText = $('div .seek-control').find('.total-time').html(totalTime);
-      
-      //console.log($totalTimeText.html());
-      console.log('value of totalTime is: '+ totalTime);
+    var totalTime = filterTimeCode(currentSongFromAlbum.duration);
+    $totalTime.html(totalTime);
+  
+/*  console.log($totalTime.html());
+  console.log('total time is :' + totalTime);*/
 };
 
 var filterTimeCode = function(timeInSeconds){
-      var timeInSeconds = parseFloat(timeInSeconds);
+
+      var timeInSeconds = timeInSeconds.toString();
+      parseFloat(timeInSeconds);
       var minutes = Math.floor(timeInSeconds / 60);
       var seconds = Math.floor(timeInSeconds - (minutes * 60));
-      var timeCode = minutes + ':' + seconds;
-    
-      return timeCode;
+      var timeCode = '';
+          if(seconds < 10){
+               return timeCode = minutes + ':0' + seconds;
+          }else{
+               return timeCode = minutes + ':' + seconds;
+          };     
+/*  console.log(timeCode);
+  console.log('time in seconds is :'+ timeInSeconds);*/
 };
 
 var seek = function(time){
@@ -269,8 +275,8 @@ var updatePlayerBarSong = function(){
 
   $('.currently-playing .song-name').text(currentSongFromAlbum.title);
   $('.currently-playing .artist-name').text(currentAlbum.artist);
+  setTotalTimeInPlayerBar();
   $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
- setTotalTimeInPlayerBar();
   $('.main-controls .play-pause').html(playerBarPauseButton);
  
 };
@@ -288,6 +294,10 @@ var currentVolume = 80;
 
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
+//added for assignment 21:
+var $totalTime = $('.player-bar .total-time');
+var $currentTime = $('.player-bar .currentTime');
+
 
  $(document).ready(function(){
      setCurrentAlbum(albumPicasso);
